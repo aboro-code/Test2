@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout'){
             steps {
-                checkout scm
+                git url: 'https://github.com/aboro-code/Test2.git' , branch: 'master'
             }
         }
         stage('Build') {
