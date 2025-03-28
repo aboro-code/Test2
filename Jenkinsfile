@@ -1,24 +1,27 @@
 pipeline {
     agent any
-    stages {
+    tools{
+        maven 'demo'
+    }
+    stages{
         stage('Checkout'){
-            steps {
-                checkout scm
+            step{
+                git url: 'https://github.com/aboro-code/Test2.git', branch: 'master'
             }
         }
-        stage('Build') {
-            steps {
-                echo 'Building..'
+        stage('Build'){
+            steps{
+                echo 'Building'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
+        stage('Test'){
+            steps{
+                echo 'Testing'
             }
         }
-        stage('Deploy') {
-            steps { // Add the steps block here
-                echo 'Deploying...'
+        stage('Deploy'){
+            steps{
+                echo 'Deploying'
             }
         }
     }
