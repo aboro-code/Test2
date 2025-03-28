@@ -17,7 +17,9 @@ pipeline {
             }
         }
         stage('Deploy') {
-            echo 'Deploying...'
+            steps { // Add the steps block here
+                echo 'Deploying...'
+            }
         }
     }
 }
