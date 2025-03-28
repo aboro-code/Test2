@@ -1,24 +1,30 @@
 pipeline {
     agent any
+    tools{
+        maven 'demo'
+    }
     stages {
         stage('Checkout'){
             steps {
-                checkout scm
+                git url: 'https://github.com/aboro-code/Test2.git', branch: 'master'
             }
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing...'
+                sh 'mvn test'
             }
         }
-        stage('Deploy') {
+        stage('Run JAR') {
             steps { // Add the steps block here
-                echo 'Deploying...'
+                script{
+                    def output = sh(script: 'java -jar target/simple-java-project-1.0-SNAPSHOT.jar', returnStdout: true)
+                    echo "Output from the JAR: ${output}"
+                }
             }
         }
     }
